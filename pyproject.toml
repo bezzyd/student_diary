@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "studentdiary"
+version = "0.1.0"
+description = ""
+authors = ["Alexandr Usenko <usenko.alexandr97@mail.ru>"]
+readme = "README.md"
+packages = [{include = "studentdiary", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.5"
+django-birthday = "^0.1.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
