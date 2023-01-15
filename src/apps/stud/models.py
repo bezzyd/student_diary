@@ -6,7 +6,7 @@ class User(models.Model):
     SEX_CHOICES = [(0, 'male'), (1, 'female')]
 
     first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)      
+    last_name = models.CharField(max_length=20)   
     birth_date = models.DateField(auto_now=False, auto_now_add=False)
     sex = models.IntegerField(blank=True, null=True, choices=SEX_CHOICES)
     profile_photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True)
@@ -63,12 +63,12 @@ class DiaryRecord(models.Model):
 class Class(models.Model):
 
     GRADE_CHOICES = [
-        (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7),
-        (7, 8), (8, 9), (9, 10), (10, 11)
+        (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
+        (8, 8), (9, 9), (10, 10), (11, 11)
         ]
 
     NAME_CHOICES = [
-        (0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')
+        ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')
         ]
 
     grade = models.IntegerField(choices=GRADE_CHOICES, null=True)
