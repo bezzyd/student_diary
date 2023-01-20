@@ -37,20 +37,32 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
-name = "django-birthday"
-version = "0.1.4"
-description = "Helper field and manager for working with birthdays"
+name = "djangorestframework"
+version = "3.14.0"
+description = "Web APIs for Django, made easy."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "djangorestframework-3.14.0-py3-none-any.whl", hash = "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"},
+    {file = "djangorestframework-3.14.0.tar.gz", hash = "sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8"},
+]
+
+[package.dependencies]
+django = ">=3.0"
+pytz = "*"
+
+[[package]]
+name = "pytz"
+version = "2022.7.1"
+description = "World timezone definitions, modern and historical"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-birthday-0.1.4.tar.gz", hash = "sha256:bab5930be90030208de943cea8bac293309751f1fa95b7b6a0d823bda251ef9a"},
-    {file = "django_birthday-0.1.4-py3-none-any.whl", hash = "sha256:4bdf28a42e37f19f423b530df31b0567bfe8d968591e4ff26533f57b7f5a360d"},
+    {file = "pytz-2022.7.1-py2.py3-none-any.whl", hash = "sha256:78f4f37d8198e0627c5f1143240bb0206b8691d8d7ac6d78fee88b78733f8c4a"},
+    {file = "pytz-2022.7.1.tar.gz", hash = "sha256:01a0681c4b9684a28304615eba55d1ab31ae00bf68ec157ec3708a8182dbbcd0"},
 ]
-
-[package.extras]
-develop = ["django", "pytest", "pytest-django", "tox"]
-test = ["pytest", "pytest-cov", "pytest-django"]
 
 [[package]]
 name = "sqlparse"
@@ -79,4 +91,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "67d807019805d130ef4df5f81aaa75c24f9e32bfb1ecb429b3761d92c53ca4d7"
+content-hash = "f61e231e10cc01b18aab016b45d084532104e38627c33f0be1122f27f7ea2fe8"
