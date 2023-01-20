@@ -24,9 +24,9 @@ class GradeChoices(models.IntegerChoices):
         Tenth = 10, '10'
         Eleventh = 11, '11'
 
-class NameChoices(models.IntegerChoices):
-        A_name = 1, 'A'
-        B_name = 2, 'B'
-        C_name = 3, 'C'
-        D_name = 4, 'D'
+class NameChoices(models.TextChoices):
+        A_name = 'A', 'A'
+        B_name = 'B', 'B'
+        C_name = 'C', 'C'
+        D_name = 'D', 'D'
         

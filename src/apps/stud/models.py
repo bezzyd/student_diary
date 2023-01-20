@@ -1,19 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext as _
+
 from datetime import datetime, date
 from .const import *
+from .managers import CustomUserManager
 
 
-class User(models.Model):
+class CustomUser(AbstractUser):
 
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)   
-    birth_date = models.DateField()
+    email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    # birth_date = models.DateField(blank=True, null=True)
     sex = models.IntegerField(blank=True, null=True, choices=SexChoices.choices)
     profile_photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ('username', 'first_name', 'last_name')
     
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -24,7 +32,7 @@ class TeacherProfile(models.Model):
         verbose_name = 'Teacher profile'
         verbose_name_plural = 'Teachers Profiles'
 
-    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='teacher_profile')
+    user = models.OneToOneField('CustomUser', on_delete=models.CASCADE, related_name='teacher_profile')
     subjects = models.ManyToManyField('Subject')
     classes = models.ManyToManyField('Class')
 
@@ -37,7 +45,7 @@ class StudentProfile(models.Model):
         verbose_name = 'Student Profile'
         verbose_name_plural = 'Students Profiles'
 
-    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='student_profile')
+    user = models.OneToOneField('CustomUser', on_delete=models.CASCADE, related_name='student_profile')
     school_class = models.ForeignKey('Class', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -79,7 +87,7 @@ class Subject(models.Model):
         verbose_name = 'Subject'
         verbose_name_plural = 'Subjects'
 
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=30)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
