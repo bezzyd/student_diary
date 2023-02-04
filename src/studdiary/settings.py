@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.stud',
 
+    # third party
     'rest_framework',
 
+    # my apps
+    'apps.stud',
 ]
 
 MIDDLEWARE = [
@@ -103,6 +105,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
+SIMPLE_JWT = {
+    "ROTATE_REFRESH_TOKENS": True,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

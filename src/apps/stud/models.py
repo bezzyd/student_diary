@@ -94,6 +94,7 @@ class Subject(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
 class Lesson(models.Model):
 
     class Meta:
