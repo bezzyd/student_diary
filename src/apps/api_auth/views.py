@@ -6,9 +6,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from apps.stud.models import CustomUser, DiaryRecord, StudentProfile
-from apps.api_auth.serializers import UserSerializer, UserCreateSerializer
-from apps.api_auth.permissions import IsOwnerOnly
+from src.apps.stud.models import CustomUser, DiaryRecord, StudentProfile
+from src.apps.api_auth.serializers import UserSerializer, UserCreateSerializer
+from src.apps.api_auth.permissions import IsOwnerOnly
 
 
 class StudentOwnerDiary(APIView):

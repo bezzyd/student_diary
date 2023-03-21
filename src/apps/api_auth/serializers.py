@@ -1,4 +1,4 @@
-from apps.stud.models import CustomUser
+from src.apps.stud.models import CustomUser
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 

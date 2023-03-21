@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Alexandr Usenko <usenko.alexandr97@mail.ru>"]
 readme = "README.md"
-packages = [{include = "studentdiary", from = "src"}]
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -18,3 +18,6 @@ pytest-django = "^4.5.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+dj = "src.manage:main"
