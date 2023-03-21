@@ -1,8 +1,10 @@
 from django.db import models
 
+
 class SexChoices(models.IntegerChoices):
         MALE = 1, 'male'
         FEMALE = 2, 'female'
+
 
 class MarkChoices(models.IntegerChoices):
         Terrible = 1, '1 - Terrible'
@@ -10,6 +12,7 @@ class MarkChoices(models.IntegerChoices):
         Satisfactory = 3, '3 - Satisfactory'
         Good = 4, '4 - Good'
         Excellent = 5, '5 - Excellent'
+
 
 class GradeChoices(models.IntegerChoices):
         First = 1, '1'
@@ -24,9 +27,9 @@ class GradeChoices(models.IntegerChoices):
         Tenth = 10, '10'
         Eleventh = 11, '11'
 
+
 class NameChoices(models.TextChoices):
         A_name = 'A', 'A'
         B_name = 'B', 'B'
         C_name = 'C', 'C'
         D_name = 'D', 'D'
-        

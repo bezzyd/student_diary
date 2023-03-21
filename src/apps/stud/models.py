@@ -16,15 +16,17 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    # birth_date = models.DateField(blank=True, null=True)
+    birth_date = models.DateField(blank=True, null=True)
     sex = models.IntegerField(blank=True, null=True, choices=SexChoices.choices)
     profile_photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, null=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ('username', 'first_name', 'last_name')
+    REQUIRED_FIELDS = ('first_name', 'last_name')
+    objects = CustomUserManager()
     
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
 
 class TeacherProfile(models.Model):
 
@@ -38,6 +40,7 @@ class TeacherProfile(models.Model):
 
     def __str__(self):
         return f'{self.user}'
+
 
 class StudentProfile(models.Model):
 
@@ -53,7 +56,7 @@ class StudentProfile(models.Model):
 
 
 class DiaryRecord(models.Model):
-        
+      
     class Meta:
         verbose_name = 'Diary Record'
         verbose_name_plural = 'Diary Records'
@@ -66,6 +69,7 @@ class DiaryRecord(models.Model):
     def __str__(self):
         return f'{self.student}'
 
+
 class Class(models.Model):
 
     class Meta:
@@ -77,9 +81,10 @@ class Class(models.Model):
     name = models.CharField(max_length=1, choices=NameChoices.choices, null=True)
     subjects = models.ManyToManyField('Subject')
     year = models.DateField()
-    
+
     def __str__(self):
         return f'{self.grade}-{self.name}'
+
 
 class Subject(models.Model):
 
@@ -93,11 +98,12 @@ class Subject(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
 class Lesson(models.Model):
 
     class Meta:
-            verbose_name = 'Lesson'
-            verbose_name_plural = 'Lessons'
+        verbose_name = 'Lesson'
+        verbose_name_plural = 'Lessons'
 
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE, related_name='subject_lesson')
     school_class = models.ForeignKey('Class', on_delete=models.CASCADE, related_name='class_lesson')
