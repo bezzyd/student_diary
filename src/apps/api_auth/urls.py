@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from apps.api_auth.views import MyTokenRefreshView, UserViewSet, StudentOwnerDiary
+from src.apps.api_auth.views import MyTokenRefreshView, UserViewSet, StudentOwnerDiary
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
 )

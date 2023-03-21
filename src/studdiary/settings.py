@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     # my_apps
-    'apps.stud',
-    'apps.api_auth',
+    'src.apps.stud',
+    'src.apps.api_auth',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'studdiary.urls'
+ROOT_URLCONF = 'src.studdiary.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'studdiary.wsgi.application'
+WSGI_APPLICATION = 'src.studdiary.wsgi.application'
 
 
 # Database
