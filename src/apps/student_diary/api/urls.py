@@ -1,0 +1,1 @@
+    path('mark/', StudentOwnerDiary.as_view())

@@ -1,20 +1,24 @@
-from src.apps.stud.models import CustomUser
+from src.apps.users.models.users import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
-        model = CustomUser
-        fields = ['url', 'username', 'email']
+        model = User
+        fields = ['url', 'email']
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
     repeated_password = serializers.CharField()
 
     class Meta:
-        model = CustomUser
-        fields = ['email', 'username', 'first_name', 'last_name', 'password', 'repeated_password']
+        model = User
+        fields = [
+            'email', 'first_name', 'last_name',
+            'profile_type', 'password', 'repeated_password'
+        ]
 
     def validate_password(self, password: str):
         if password.isdigit():
@@ -28,4 +32,4 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return super().validate(attrs)
 
     def create(self, validated_data):
-        return CustomUser.objects.create_user(**validated_data)
+        return User.objects.create_user(**validated_data)
