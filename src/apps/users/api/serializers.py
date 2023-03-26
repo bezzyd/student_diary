@@ -11,12 +11,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    repeated_password = serializers.CharField()
+    repeated_password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
         fields = [
-            'email', 'first_name', 'last_name',
+            'pk', 'email', 'first_name', 'last_name',
             'profile_type', 'password', 'repeated_password'
         ]
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # third_party
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_extensions',
 
     # my_apps
     'src.apps.users',

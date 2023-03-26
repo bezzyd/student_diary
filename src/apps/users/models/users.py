@@ -11,6 +11,7 @@ class User(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
+    username = models.CharField(max_length=50, blank=True, null=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -29,3 +30,11 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    @property
+    def is_student(self):
+        return hasattr(self, 'student_profile')
+
+    @property
+    def is_teacher(self):
+        return hasattr(self, 'teacher_profile')

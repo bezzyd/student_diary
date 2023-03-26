@@ -1,1 +1,1 @@
-    path('mark/', StudentOwnerDiary.as_view())
+#path('mark/', StudentOwnerDiary.as_view())
