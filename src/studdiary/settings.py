@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_extensions',
+    'post_office',
 
     # my_apps
     'src.apps.users',
     'src.apps.student_diary',
+    'src.apps.api_auth',
 ]
 
 MIDDLEWARE = [
@@ -175,3 +177,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+EMAIL_BACKEND = 'post_office.EmailBackend'

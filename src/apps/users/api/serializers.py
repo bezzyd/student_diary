@@ -25,7 +25,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
             raise ValidationError('numeric')
         return password
 
-    def validate(self, attrs):
+    def validate(self, attrs: dict):
         repeated_password = attrs.pop('repeated_password')
         if attrs['password'] != repeated_password:
             raise ValidationError(dict(password='different'))

@@ -13,7 +13,7 @@ def test_create_user(api_client):
         'profile_type': ProfileChoices.STUDENT,
         'email': 'sanya11@gmail.com',
         'password': '123fdsfdsaQ~',
-        'repeated_password': '123fdsfdsaQ~'
+        'repeated_password': '123fdsfdsaQW'
     }
     response = client.post(reverse('user-list'), data=data, format='json')
-    assert response.status_code == 201, response.data
+    assert response.status_code == 400, response.data

@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenRefreshView
+from post_office import mail
+from src.apps.users.forms import CustomUserCreationForm
 from src.apps.users.models.users import User
 from src.apps.users.api.serializers import UserSerializer, UserCreateSerializer
 
@@ -30,3 +32,23 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             serializer_class = UserCreateSerializer
         return serializer_class
+
+
+# class UserCreateAPIView:
+
+    # def sign_up(request):
+    #     if request.method == 'POST':
+    #         form = CustomUserCreationForm
+    #         if form.is_valid():
+    #             user = form.save(commit=False)
+    #             user.is_active = False
+    #             user.save()
+
+#     serializer_class = UserCreateSerializer
+#     #user.is_active = False
+#     test_user = User.objects.get(pk=1)
+#     mail.send(
+#         test_user.email,
+#         #link активации
+#     )
+#     #после активации срабатывает функция, меняющие значит is_active = True

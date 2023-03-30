@@ -1,6 +1,7 @@
 import pytest
 from django.urls import reverse
 from src.apps.users.const import ProfileChoices
+from src.apps.users.models.users import User
 
 
 @pytest.mark.django_db
@@ -10,10 +11,13 @@ def test_create_user(api_client):
         'username': 'sanya',
         'first_name': 'Alex',
         'last_name': 'Abraka',
-        'profile_type': ProfileChoices.STUDENT,
+        'profile_type': ProfileChoices.TEACHER,
         'email': 'sanya11@gmail.com',
         'password': '123fdsfdsaQ~',
         'repeated_password': '123fdsfdsaQ~'
     }
     response = client.post(reverse('user-list'), data=data, format='json')
-    assert response.status_code == 201, response.data
+    assert User.objects.filter(pk=response.data['pk']).exists()
+    user = User.objects.get(pk=response.data['pk'])
+    assert user.is_teacher
+    assert not user.is_student
