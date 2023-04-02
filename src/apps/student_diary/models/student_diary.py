@@ -3,10 +3,6 @@ from django.db import models
 
 class StudentDiary(models.Model):
 
-    class Meta:
-        verbose_name = 'Diary Record'
-        verbose_name_plural = 'Diary Records'
-
     student = models.ForeignKey(
         'users.StudentProfile',
         on_delete=models.CASCADE,
