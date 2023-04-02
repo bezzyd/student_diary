@@ -3,7 +3,6 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 class IsOwnerOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
-            return True
-
-        return obj.student == request.user.student_profile
+        result = request.user.student_profile.student_diary.filter(pk=obj.pk).exists()
+        print(result)
+        return result
