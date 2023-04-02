@@ -1,6 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
+from src.apps.student_diary.api.permissions import IsOwnerOnly
+from src.apps.users.api.serializers import UserSerializer
+from src.apps.users.models.profiles import StudentProfile
 
 
 class StudentOwnerDiary(APIView):

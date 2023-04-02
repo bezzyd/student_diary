@@ -3,7 +3,7 @@ from django.urls import reverse
 from src.apps.users.const import ProfileChoices
 from src.apps.users.models.users import User
 
-
+#это не апи тест, проверить есть ли атрибут студента
 @pytest.mark.django_db
 def test_create_user(api_client):
     client = api_client()

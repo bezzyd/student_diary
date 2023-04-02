@@ -17,7 +17,6 @@ def test_create_user(api_client):
         'repeated_password': '123fdsfdsaQ~'
     }
     response = client.post(reverse('user-list'), data=data, format='json')
-    assert User.objects.filter(pk=response.data['pk']).exists()
     user = User.objects.get(pk=response.data['pk'])
     assert user.is_student
     assert not user.is_teacher
