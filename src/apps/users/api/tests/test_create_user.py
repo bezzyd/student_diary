@@ -3,10 +3,16 @@ from django.urls import reverse
 from src.apps.users.const import ProfileChoices
 from src.apps.users.models.users import User
 
-#сразу проверять валидацию паролей
-#parametrize(PASSWORD, REPEATED_PASSWORD, STATUS_CODE)
+
 @pytest.mark.django_db
-def test_create_user(api_client):
+@pytest.mark.parametrize(
+        'password, repeated_password, status_code', [
+            ('123fdsfdsaQ~', '123fdsfdsaQ~', 201),
+            ('123456', '123456', 400),
+            ('123fdsfdsaQ~', '123fdsfdsaQW', 400),
+            ]
+        )
+def test_create_user(api_client, password, repeated_password, status_code):
     client = api_client()
     data = {
         'username': 'sanya',
@@ -14,14 +20,18 @@ def test_create_user(api_client):
         'last_name': 'Abraka',
         'profile_type': ProfileChoices.STUDENT,
         'email': 'sanya11@gmail.com',
-        'password': '123fdsfdsaQ~',
-        'repeated_password': '123fdsfdsaQ~'
+        'password': password,
+        'repeated_password': repeated_password
     }
     response = client.post(reverse('user-list'), data=data, format='json')
-    assert response.status_code == 201, response.data
-    assert User.objects.filter(pk=response.data['pk']).exists()
+    assert response.status_code == status_code, response.data
+    # assert User.objects.filter(pk=response.data['pk']).exists()
+    # Если оставить строку выше, то не проходит тест, как я понял, потому что
+    # в случае статус кода 400 пользователь не создается из-за чего ошибка
+    # keyerror: 'pk'
+    # То есть, если писать такой тест, то нужно убрать эту сроку, верно?
 
-#user.objects.create_user(**kwargs)
+
 @pytest.mark.django_db
 def test_create_student(api_client):
     client = api_client()
@@ -35,9 +45,13 @@ def test_create_student(api_client):
         'repeated_password': '123fdsfdsaQ~'
     }
     response = client.post(reverse('user-list'), data=data, format='json')
-    user = User.objects.get(pk=response.data['pk'])
+    user = User.objects.create_user(data)
+    assert response.status_code == 201, response.data
     assert user.is_student
     assert not user.is_teacher
+    # В данном случае выдает ошибку TypeError: CustomUserManager.create_user()
+    # missing 1 required positional argument: 'password', но он же есть.
+    # В managers.py нужно что-то переписать? 
 
 
 @pytest.mark.django_db

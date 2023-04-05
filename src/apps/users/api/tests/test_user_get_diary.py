@@ -5,7 +5,7 @@ from src.apps.users.models.users import User
 
 #это не апи тест, проверить есть ли атрибут студента
 @pytest.mark.django_db
-def test_create_user(api_client):
+def test_uset_get_diary(api_client):
     client = api_client()
     data = {
         'username': 'sanya',
