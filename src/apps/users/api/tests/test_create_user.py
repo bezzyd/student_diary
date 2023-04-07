@@ -43,7 +43,7 @@ def test_create_student(api_client):
         'email': 'sanya11@gmail.com',
         'password': '123fdsfdsaQ~',
         'repeated_password': '123fdsfdsaQ~'
-    }
+    }   
     response = client.post(reverse('user-list'), data=data, format='json')
     user = User.objects.create_user(data)
     assert response.status_code == 201, response.data
@@ -51,7 +51,7 @@ def test_create_student(api_client):
     assert not user.is_teacher
     # В данном случае выдает ошибку TypeError: CustomUserManager.create_user()
     # missing 1 required positional argument: 'password', но он же есть.
-    # В managers.py нужно что-то переписать? 
+    # В managers.py нужно что-то переписать?
 
 
 @pytest.mark.django_db
