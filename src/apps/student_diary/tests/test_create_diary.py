@@ -15,10 +15,11 @@ def test_get_diary_by_username(api_client):
         profile_type=ProfileChoices.STUDENT
     )
     client.force_authenticate(user)
-    
-    response = client.get(reverse("diary-detail", kwargs={"username": user.username}))
-    assert response.status_code == 200, response.data
 
+    response = client.get(
+        reverse("diary-detail", kwargs={"username": user.username})
+    )
+    assert response.status_code == 200, response.data
 
     user2 = User.objects.create_user(
         email="sanya@bez.ru",
@@ -28,6 +29,8 @@ def test_get_diary_by_username(api_client):
     )
 
     client.force_authenticate(user2)
-    response = client.get(reverse("diary-detail", kwargs={"username": user.username}))
+    response = client.get(
+        reverse("diary-detail", kwargs={"username": user.username})
+    )
     assert response.status_code == 403, user2.student_profile.student_diary.filter(
-            pk=user.student_profile.student_diary.first().pk).exists()
+        pk=user.student_profile.student_diary.first().pk).exists()
