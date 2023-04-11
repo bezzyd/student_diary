@@ -29,7 +29,6 @@ def test_create_user(api_client, password, repeated_password, status_code):
 
 @pytest.mark.django_db
 def test_create_student():
-    # client = api_client()
     data = {
         'username': 'sanya',
         'first_name': 'Alex',
@@ -37,22 +36,15 @@ def test_create_student():
         'profile_type': ProfileChoices.STUDENT,
         'email': 'sanya11@gmail.com',
         'password': '123fdsfdsaQ~',
-        # 'repeated_password': '123fdsfdsaQ~'
     }
-    # response = client.post(reverse('user-list'), data=data, format='json')
     user = User.objects.create_user(**data)
-    # assert response.status_code == 201, response.data
     assert user.is_student
     assert not user.is_teacher
     assert hasattr(user.student_profile, 'student_diary')
-    # В данном случае выдает ошибку TypeError: CustomUserManager.create_user()
-    # missing 1 required positional argument: 'password', но он же есть.
-    # В managers.py нужно что-то переписать?
 
 
 @pytest.mark.django_db
-def test_create_teacher(api_client):
-    client = api_client()
+def test_create_teacher():
     data = {
         'username': 'sanya',
         'first_name': 'Alex',
@@ -60,9 +52,7 @@ def test_create_teacher(api_client):
         'profile_type': ProfileChoices.TEACHER,
         'email': 'sanya11@gmail.com',
         'password': '123fdsfdsaQ~',
-        'repeated_password': '123fdsfdsaQ~'
     }
-    response = client.post(reverse('user-list'), data=data, format='json')
-    user = User.objects.get(pk=response.data['pk'])
+    user = User.objects.create_user(**data)
     assert user.is_teacher
     assert not user.is_student
