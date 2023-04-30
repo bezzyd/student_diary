@@ -6,35 +6,34 @@ from src.apps.users.managers import CustomUserManager
 
 
 class User(AbstractUser):
-
-    class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
-
     username = models.CharField(max_length=50, blank=True, null=True)
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(_("email address"), unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    profile_type = models.IntegerField(choices=ProfileChoices.choices)
+    profile_type = models.PositiveSmallIntegerField(choices=ProfileChoices.choices)
     birth_date = models.DateField(blank=True, null=True)
-    sex = models.IntegerField(
+    sex = models.PositiveSmallIntegerField(
         choices=SexChoices.choices, blank=True, null=True
     )
     profile_photo = models.ImageField(
         upload_to="photos/%Y/%m/%d/", blank=True, null=True
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ('first_name', 'last_name')
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ("first_name", "last_name")
     objects = CustomUserManager()
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.get_full_name()
+
+    @property
+    def slug(self):
+        return self.username or self.email.split("@")[0]
 
     @property
     def is_student(self):
-        return hasattr(self, 'student_profile')
+        return hasattr(self, "student_profile")
 
     @property
     def is_teacher(self):
-        return hasattr(self, 'teacher_profile')
+        return hasattr(self, "teacher_profile")

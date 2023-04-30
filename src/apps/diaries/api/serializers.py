@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from src.apps.student_diary.models.student_diary import StudentDiary
+from src.apps.diaries.models.student_diary import StudentDiary
 
 
 class DiarySerializer(serializers.ModelSerializer):

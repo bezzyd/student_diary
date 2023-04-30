@@ -2,15 +2,15 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 
-from src.apps.student_diary.api.permissions import IsOwnerOnly
-from src.apps.student_diary.api.serializers import DiarySerializer
-from src.apps.student_diary.models.student_diary import StudentDiary
+from src.apps.diaries.api.permissions import IsOwnerOnly
+from src.apps.diaries.api.serializers import DiarySerializer
+from src.apps.diaries.models.student_diary import StudentDiary
 
 
 class StudentOwnerDiary(GenericAPIView):
     queryset = StudentDiary.objects.all()
     serializer_class = DiarySerializer
-    permission_classes = (IsOwnerOnly, )
+    permission_classes = (IsOwnerOnly,)
     lookup_field = "student__user__username"
     lookup_url_kwarg = "username"
 

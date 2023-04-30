@@ -1,1 +1,1 @@
-from src.apps.users.models import profiles, users
+from src.apps.users.models import users
