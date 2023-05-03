@@ -1,8 +1,11 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.decorators import action
+from post_office.mail import send, PRIORITY
+from django.conf import settings
 
 from src.apps.users.models.users import User
 from src.apps.users.api.serializers import UserSerializer, UserCreateSerializer
@@ -33,12 +36,21 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer_class = UserCreateSerializer
         return serializer_class
 
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+        send(
+            serializer.data['email'],
+            settings.EMAIL_SENDER,
+            subject="verification",
+            message=settings.SITE_APP + reverse('user-verify', args=('123',)),
+            priority=PRIORITY.now
+        )
 
-@action(
+    @action(
         detail=False,
-        method=['get'],
+        methods=['get'],
         url_name='verify',
         url_path='verify/(?P<code>[0-9]+)',
-)
-def verify(self, requets, code):
-    return Response
+    )
+    def verify(self, requets, code):
+        return Response()

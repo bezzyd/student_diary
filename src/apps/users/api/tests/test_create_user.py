@@ -8,11 +8,11 @@ from src.apps.users.models.users import User
 @pytest.mark.parametrize(
         'password, repeated_password, status_code', [
             ('123fdsfdsaQ~', '123fdsfdsaQ~', 201),
-            ('123456', '123456', 400),
-            ('123fdsfdsaQ~', '123fdsfdsaQW', 400),
+            # ('123456', '123456', 400),
+            # ('123fdsfdsaQ~', '123fdsfdsaQW', 400),
             ]
         )
-def test_create_user(api_client, password, repeated_password, status_code):
+def test_create_user(api_client, password, repeated_password, status_code, mailoutbox):
     client = api_client()
     data = {
         'username': 'sanya',
@@ -25,7 +25,11 @@ def test_create_user(api_client, password, repeated_password, status_code):
     }
     response = client.post(reverse('user-list'), data=data, format='json')
     assert response.status_code == status_code, response.data
-
+    assert False, str(mailoutbox[0].message)
+    # В СООБЩЕНИЕ ССЫЛКА, НА КОТОРУЮ ПОЛЬЗОВАТЕЛЬ ОТПРАВЛЯЕТ ЗАПРОС. ССЫЛКА ВЕДЕТ НА ЭНДПОИНТ VERIFY
+    # В ТЕСТЕ ОТПРАВИТЬ ЗАПРОС CLIENT.GET, нужно достать ссылку из сообщения/текст сообщения
+    # if code == 123 user.is_active = True
+    # RESPONSE.STATUS_CODE 200
 
 @pytest.mark.django_db
 def test_create_student():

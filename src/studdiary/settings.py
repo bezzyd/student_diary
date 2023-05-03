@@ -187,3 +187,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "yourmailaddr@gmail.com")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "generated_by_google_app_password")
+EMAIL_SENDER = os.environ.get("EMAIL_SENDER", EMAIL_HOST_USER)
+
+SITE_APP = os.environ.get("SITE_APP", "http://127.0.0.1:8000")

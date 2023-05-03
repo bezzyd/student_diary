@@ -32,4 +32,4 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return super().validate(attrs)
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        return User.objects.create_user(**validated_data, is_active=False)
