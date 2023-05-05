@@ -7,8 +7,12 @@ from src.apps.users.const import ProfileChoices
 class Diary(models.Model):
     student = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="diary"
-    )
-    year = models.DateField(help_text="Year of beginning of the school year")
+        )
+    lesson = models.ForeignKey(
+        "lessons.Lesson", on_delete=models.SET_NULL, related_name="lesson" # Если студент удаляется, то и логично будет удалить урок?
+        )
+    mark = models.PositiveSmallIntegerField(blank=True, null=True)
+    attendance = models.BooleanField()
 
     class Meta:
         constraints = [
