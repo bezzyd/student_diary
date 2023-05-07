@@ -6,24 +6,20 @@ from src.apps.users.managers import CustomUserManager
 
 
 class User(AbstractUser):
-    username = models.CharField(
-        max_length=50, unique=True, blank=True, null=True
-        )
+    username = models.CharField(max_length=50, unique=True, blank=True, null=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(_("email address"), unique=True)
     phone_number = models.CharField(max_length=30, unique=True)
-    addres = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
     date_of_birth = models.DateField(blank=True, null=True)
-    profile_type = models.PositiveSmallIntegerField(
-        choices=ProfileChoices.choices
-        )
+    profile_type = models.PositiveSmallIntegerField(choices=ProfileChoices.choices)
     sex = models.PositiveSmallIntegerField(
         choices=SexChoices.choices, blank=True, null=True
-        )
+    )
     profile_photo = models.ImageField(
         upload_to="photos/%Y/%m/%d/", blank=True, null=True
-        )
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ("first_name", "last_name")

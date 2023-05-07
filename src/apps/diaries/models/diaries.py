@@ -6,11 +6,14 @@ from src.apps.users.const import ProfileChoices
 
 class Diary(models.Model):
     student = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE, related_name="diary"
-        )
+        "users.User",
+        on_delete=models.CASCADE,
+        related_name="diary"
+        # Если студент удаляется, то и логично будет удалить урок?
+    )
     lesson = models.ForeignKey(
-        "lessons.Lesson", on_delete=models.SET_NULL, related_name="lesson" # Если студент удаляется, то и логично будет удалить урок?
-        )
+        "lessons.Lesson", on_delete=models.PROTECT, related_name="lesson"
+    )
     mark = models.PositiveSmallIntegerField(blank=True, null=True)
     attendance = models.BooleanField()
 
