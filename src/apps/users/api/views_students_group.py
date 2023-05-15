@@ -29,5 +29,6 @@ class AddStudentInGroup(generics.RetrieveUpdateAPIView):
     # lookup_url_kwarg = "username"
 
     def put(self, request, *args, **kwargs):
-        # Нужно дописать условие, что изменятся может только student_profile.student_group
-        return self.update(request, *args, **kwargs)
+        # Нужно дописать условие, что изменятся может только student_profile.group
+        if StudentProfile.objects.filter(group='Null'):
+            return self.update(request, *args, **kwargs)
