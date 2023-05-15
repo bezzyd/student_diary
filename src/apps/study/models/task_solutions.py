@@ -2,7 +2,9 @@ from django.db import models
 
 
 class TaskSolution(models.Model):
-    task = models.ForeignKey("Task", on_delete=models.CASCADE, related_name="solutions")
+    task = models.ForeignKey(
+        "Task", on_delete=models.CASCADE, related_name="solutions"
+    )
     student = models.ForeignKey(
         "profiles.StudentProfile",
         on_delete=models.CASCADE,

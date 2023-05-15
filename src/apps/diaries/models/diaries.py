@@ -9,7 +9,6 @@ class Diary(models.Model):
         "users.User",
         on_delete=models.CASCADE,
         related_name="diary"
-        # Если студент удаляется, то и логично будет удалить урок?
     )
     lesson = models.ForeignKey(
         "lessons.Lesson", on_delete=models.PROTECT, related_name="lesson"
