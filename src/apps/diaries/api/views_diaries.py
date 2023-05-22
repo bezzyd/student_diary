@@ -5,7 +5,7 @@ from src.apps.base.api.mixins import SerializerPerActionMixin
 from src.apps.diaries.models.diaries import Diary
 
 
-class StudentGroupViewSet(
+class DiaryViewSet(
     SerializerPerActionMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,

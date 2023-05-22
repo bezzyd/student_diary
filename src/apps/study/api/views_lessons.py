@@ -3,9 +3,11 @@ from rest_framework.viewsets import GenericViewSet
 
 from src.apps.base.api.mixins import SerializerPerActionMixin
 from src.apps.study.models.lessons import Lesson
+from src.apps.study.models.tasks import Task
+from src.apps.diaries.models.diaries import Diary
 
 
-class StudentGroupViewSet(
+class LessonsViewSet(
     SerializerPerActionMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
@@ -16,3 +18,8 @@ class StudentGroupViewSet(
         "default": LessonRetrieveCreateSerializer,
         "list": LessonListSerializer,
     }
+
+    def retrieve(self, request, *args, **kwargs):
+        attendance_count = Diary.objects.filter(attendance='True').count()
+        lessons_tasks = Task.objects.all()  # ?
+        return attendance_count, lessons_tasks

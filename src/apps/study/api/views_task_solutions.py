@@ -5,7 +5,7 @@ from src.apps.base.api.mixins import SerializerPerActionMixin
 from src.apps.study.models.task_solutions import TaskSolution
 
 
-class StudentGroupViewSet(
+class TaskSolutionsViewSet(
     SerializerPerActionMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,

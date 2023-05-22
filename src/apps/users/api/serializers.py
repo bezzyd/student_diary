@@ -1,6 +1,7 @@
-from src.apps.users.models.users import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+
+from src.apps.users.models.users import User
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

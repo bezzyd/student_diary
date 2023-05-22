@@ -5,7 +5,7 @@ from src.apps.base.api.mixins import SerializerPerActionMixin
 from src.apps.users.models.profiles import StudentProfile
 
 
-class StudentGroupViewSet(
+class StudentViewSet(
     SerializerPerActionMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,

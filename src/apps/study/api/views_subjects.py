@@ -5,7 +5,7 @@ from src.apps.base.api.mixins import SerializerPerActionMixin
 from src.apps.study.models.subjects import Subject
 
 
-class StudentGroupViewSet(
+class SubjectsViewSet(
     SerializerPerActionMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
