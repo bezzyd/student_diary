@@ -6,7 +6,7 @@ class TaskSolution(models.Model):
         "Task", on_delete=models.CASCADE, related_name="solutions"
     )
     student = models.ForeignKey(
-        "profiles.StudentProfile",
+        "users.StudentProfile",
         on_delete=models.CASCADE,
         related_name="task_solutions",
     )

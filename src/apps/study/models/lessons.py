@@ -7,7 +7,7 @@ class Lesson(models.Model):
         "Subject", on_delete=models.PROTECT, related_name="lessons"
     )
     group = models.ForeignKey(
-        "student_groups.StudentGroup",
+        "users.StudentGroup",
         on_delete=models.PROTECT,
         related_name="lessons",
     )

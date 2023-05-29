@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # my_apps
     "src.apps.users",
     "src.apps.diaries",
+    "src.apps.study",
     "src.apps.api_auth",
 ]
 

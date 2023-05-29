@@ -15,13 +15,14 @@ class StudentGroupViewSet(
     GenericViewSet,
 ):
     queryset = StudentGroup.objects.all()
-    action_serializer = {
-        "default": StudentGroupRetrieveCreateSerializer,
-        "list": StudentGroupListSerializer,
-    }
+    # action_serializer = {
+    #     "default": StudentGroupRetrieveCreateSerializer,
+    #     "list": StudentGroupListSerializer,
+    # }
 
     @action(methods=['PUT'], detail=True, url_name='add-student',
-            url_path='add-student/<int:student_pk>/', permission_classes=(IsAuthenticated,))
+            url_path='add-student/<int:student_pk>/',
+            permission_classes=(IsAuthenticated,))
     def add_student(self, request, **kwargs):
         student_group = self.get_object()
         student = StudentProfile.objects.get(pk=kwargs['student_pk'])
