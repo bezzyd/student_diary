@@ -3,22 +3,20 @@ from django.urls import path, include
 from rest_framework import routers
 
 from src.apps.users.api.views.students_groups import StudentGroupViewSet
-from src.apps.users.api.views.users import (
-    UserViewSet, TeacherViewSet, StudentViewSet
-)
+from src.apps.users.api.views.users import UserViewSet, TeacherViewSet, StudentViewSet
 
 # Импортировать все вьюсеты и создать роутер + зарегистрировать вьюсеты
 # В ЮРЛпаттернс path("api/v1/", include(router.urls))
 
 router = routers.DefaultRouter()
-router.register('', StudentGroupViewSet)
-router.register('', UserViewSet)
-router.register('', TeacherViewSet)
-router.register('', StudentViewSet)
+router.register("student-groups", StudentGroupViewSet)
+router.register("users", UserViewSet)
+router.register("teachers", TeacherViewSet)
+router.register("students", StudentViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1", include(router.urls))
+    path("api/v1/", include(router.urls)),
 ]
 
 

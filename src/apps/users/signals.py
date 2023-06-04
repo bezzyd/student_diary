@@ -12,9 +12,3 @@ def create_profile(created, instance, **kwargs):
         StudentProfile.objects.create(user=instance)
     elif created and instance.profile_type == ProfileChoices.TEACHER:
         TeacherProfile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def create_diary(created, instance, **kwargs):
-    if created and instance.profile_type == ProfileChoices.STUDENT:
-        Diary.objects.create(student=instance.student_profile)
