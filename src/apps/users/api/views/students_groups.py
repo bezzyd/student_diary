@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from src.apps.base.api.mixins import SerializerPerActionMixin
 from src.apps.users.models.student_groups import StudentGroup
 from src.apps.users.models.profiles import StudentProfile
+from src.apps.users.api.serializers.students_groups import StudentGroupSerializer
 
 
 class StudentGroupViewSet(
@@ -15,8 +16,9 @@ class StudentGroupViewSet(
     GenericViewSet,
 ):
     queryset = StudentGroup.objects.all()
-    # action_serializer = {
-    #     "default": StudentGroupRetrieveCreateSerializer,
+    action_serializer = {
+        "default": StudentGroupSerializer
+    }
     #     "list": StudentGroupListSerializer,
     # }
 

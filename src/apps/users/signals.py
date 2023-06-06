@@ -2,7 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from src.apps.users.models.users import User
 from src.apps.users.models.profiles import StudentProfile, TeacherProfile
-from src.apps.diaries.models.diaries import Diary
+# from src.apps.diaries.models.diaries import Diary
 from src.apps.users.const import ProfileChoices
 
 
@@ -14,7 +14,7 @@ def create_profile(created, instance, **kwargs):
         TeacherProfile.objects.create(user=instance)
 
 
-@receiver(post_save, sender=User)
-def create_diary(created, instance, **kwargs):
-    if created and instance.profile_type == ProfileChoices.STUDENT:
-        Diary.objects.create(student=instance.student_profile)
+# @receiver(post_save, sender=User)
+# def create_diary(created, instance, **kwargs):
+#     if created and instance.profile_type == ProfileChoices.STUDENT:
+#         Diary.objects.create(student=instance)

@@ -2,13 +2,26 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from src.apps.users.models.users import User
+from src.apps.users.models.profiles import StudentProfile
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class StudentProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StudentProfile
+        fields = ["id", 'group']
+
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = StudentProfileSerializer(source='student_profile')
+    type = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['url', 'email']
+        fields = ['email', 'profile', 'type']
+
+    def get_type(self, instance: User):
+        return instance.get_profile_type_display()
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
