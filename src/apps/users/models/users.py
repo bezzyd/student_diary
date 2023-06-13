@@ -12,7 +12,9 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(_("email address"), unique=True)
-    phone_number = models.CharField(max_length=30, unique=True, blank=True, null=True)
+    phone_number = models.CharField(
+        max_length=30, unique=True, blank=True, null=True
+    )
     address = models.CharField(max_length=50)
     date_of_birth = models.DateField(blank=True, null=True)
     profile_type = models.PositiveSmallIntegerField(

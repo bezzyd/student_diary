@@ -1,7 +1,5 @@
 from django.db import models
 
-# from src.apps.users.models.student_groups import StudentGroup
-
 
 class TeacherProfile(models.Model):
     user = models.OneToOneField(

@@ -3,9 +3,9 @@ from django.urls import path, include
 from rest_framework import routers
 
 from src.apps.users.api.views.students_groups import StudentGroupViewSet
-from src.apps.users.api.views.users import (
-    UserViewSet, TeacherViewSet, StudentViewSet
-)
+from src.apps.users.api.views.students import StudentViewSet
+from src.apps.users.api.views.teachers import TeacherViewSet
+from src.apps.users.api.views.users import UserViewSet
 
 router = routers.DefaultRouter()
 router.register("student-groups", StudentGroupViewSet)
